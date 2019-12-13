@@ -2,7 +2,7 @@
 if !has('gui_running') | set t_Co=256 | endif
 
 " Hide line numbers by default
-set nonumber
+set number
 
 " Wildignore
 set wig+=vendor,log,logs

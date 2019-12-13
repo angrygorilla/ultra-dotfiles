@@ -1,6 +1,6 @@
 
 " ctrl-s to save
-remap <C-s> :w<CR>
+noremap <C-s> :w<CR>
 
 " ctrl-p to open a file via fzf
 if exists(':FZF')

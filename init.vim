@@ -22,6 +22,8 @@ Plug 'rstacruz/vim-opinion'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
