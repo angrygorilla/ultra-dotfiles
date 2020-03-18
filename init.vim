@@ -1,3 +1,5 @@
+" https://github.com/angrygorilla/vim-from-scratch
+
 set nocompatible
 let g:mapleader=","
 
@@ -18,12 +20,38 @@ endif
 call plug#begin('~/.vim/vendor')
 
 if !has('nvim') && !exists('g:gui_oni') | Plug 'tpope/vim-sensible' | endif
+
+" Cool Stuff
 Plug 'rstacruz/vim-opinion'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
+Plug 'junegunn/vim-emoji' " https://github.com/junegunn/vim-emoji
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree'
+Plug 'yegappan/mru'
+
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Javascript
+Plug 'othree/yajs'
+Plug 'othree/javascript-libraries-syntax.vim'
+
+" Formatting
+Plug 'Vimjas/vim-python-pep8-indent'
+
+" Syntax Highlighting
+Plug 'plasticboy/vim-markdown'
 Plug 'sheerun/vim-polyglot'
+
+" Visuals
+Plug 'altercation/vim-colors-solarized'
+
+" Commenting
+Plug 'tomtom/tlib_vim'
+Plug 'tomtom/tcomment_vim'
 
 call plug#end()
 
