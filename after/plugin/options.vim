@@ -1,23 +1,73 @@
-" Enable 256-color by default in the terminal
-if !has('gui_running') | set t_Co=256 | endif
+" Mostly stolen from Yan Pritzer's most excellent Yadr (github.com/skwp/dotfiles)
 
-" Hide line numbers by default
-set number
+" Enable 256-color by default in the terminal
+"if !has('gui_running') | set t_Co=256 | endif
+
+
+" ================ General Config ====================
+
+set number                      "Line numbers are good
 
 " turn on syntax highlighting
-syntax enable
+syntax on
 
 " Better search
 set hlsearch
 set incsearch
+set history=1000                "Store lots of :cmdline history
 
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
+set showcmd                     "Show incomplete cmds down the bottom
+set showmode                    "Show current mode down the bottom
+
+set nowrap                      "Don't wrap lines
+set linebreak                   "Wrap lines at convenient points
+
+" Move normally between wrapped lines
+nmap j gj
+nmap k gk
+
+autocmd BufReadPre,FileReadPre *.md :set wrap
+
+set visualbell                  "No sounds
+" set autoread                    "Reload files changed outside vim
+
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+
+set noswapfile
+set nobackup
+set nowb
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
+" =========== Indentation ===========
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+
+" Auto indent pasted text
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
 
 " Wildignore
 set wig+=vendor,log,logs
 
+autocmd FocusLost * silent! wa " Automatically save file
 set scrolloff=5 " Keep 5 lines below and above the cursor
+set cursorline
 
 " grep word under cursor
 " nnoremap <Leader>g :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
@@ -31,7 +81,6 @@ if has("gui_running")
 "tell the term has 256 colors
   set t_Co=256
 end
-
 
 "
 " ALE
@@ -95,3 +144,20 @@ imap <C-/> <Esc>:TComment<CR>i
 map <Leader>/ :TComment<CR>
 
 
+" status line changes
+function! GetBranchName(_) abort
+  let b:branch_name = systemlist("git rev-parse --abbrev-ref HEAD 2> /dev/null || echo ''")[0]
+endfunction
+call timer_start(1000, function('GetBranchName'), {'repeat': -1})
+
+autocmd BufEnter,BufWritePost * call GetBranchName("")
+
+set laststatus=2
+set statusline=%f " tail of the filename
+set statusline+=\ c:%c " column number
+set statusline+=%= " switching to right side
+set statusline+=%(%{b:branch_name}%)
+
+" Open splits on the right and below
+set splitbelow
+set splitright

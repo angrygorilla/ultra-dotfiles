@@ -22,15 +22,24 @@ call plug#begin('~/.vim/vendor')
 if !has('nvim') && !exists('g:gui_oni') | Plug 'tpope/vim-sensible' | endif
 
 " Cool Stuff
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rstacruz/vim-opinion'
+Plug 'Shougo/neocomplete.vim'
 
+" MRU Most recently used
+Plug 'yegappan/mru'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'Shougo/neocomplete.vim'
+Plug 'victormours/better-writing.vim'
+Plug 'janko-m/vim-test'
+
 Plug 'w0rp/ale'
 Plug 'junegunn/vim-emoji' " https://github.com/junegunn/vim-emoji
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'scrooloose/nerdtree'
-Plug 'yegappan/mru'
 
 " Git
 Plug 'tpope/vim-fugitive'
